@@ -1,0 +1,5 @@
+[
+  {"name": "Viktor Rennko", "list": "OFAC-SDN", "reason": "asset freeze order"},
+  {"name": "Global Trade Holdings Ltd", "list": "OFAC-SDN", "reason": "sanctioned entity"},
+  {"name": "Amara Solis", "list": "EU-Consolidated", "reason": "asset freeze order"}
+]

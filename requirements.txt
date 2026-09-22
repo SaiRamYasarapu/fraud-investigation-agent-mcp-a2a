@@ -1,0 +1,12 @@
+# Core agent orchestration
+langgraph>=0.2
+
+# MCP (Model Context Protocol) - pinned to 1.x for FastMCP API
+mcp<2
+
+# Vector store / RAG (offline TF-IDF demo retriever)
+scikit-learn>=1.4
+numpy>=1.26
+
+# Bedrock client (only required if USE_LIVE_BEDROCK=true)
+boto3>=1.34

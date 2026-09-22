@@ -1,0 +1,46 @@
+# Amazon Bedrock AgentCore Runtime deployment config (reference, not executed
+# in this repo - deploying requires an AWS account with Bedrock AgentCore
+# access). This documents how the local demo maps onto a real deployment.
+#
+# Deploy with the AgentCore CLI, e.g.:
+#   agentcore configure --entrypoint main.py --name fraud-risk-investigation
+#   agentcore launch
+#
+# See: https://docs.aws.amazon.com/bedrock/latest/userguide/agentcore.html
+
+runtime:
+  name: fraud-risk-investigation-agent
+  entrypoint: main.py
+  framework: langgraph          # AgentCore Runtime is framework-agnostic;
+                                 # this agent uses LangGraph for orchestration
+  model:
+    provider: bedrock
+    model_id: anthropic.claude-3-5-sonnet-20241022-v2:0
+
+memory:
+  # AgentCore Memory persists InvestigationState across turns of a
+  # multi-turn investigation (e.g. an analyst asking follow-up questions
+  # about a flagged transaction).
+  enabled: true
+  strategy: short_term_and_long_term
+
+gateway:
+  # AgentCore Gateway converts the MCP server in src/mcp_server/server.py
+  # into a managed, authenticated MCP endpoint the deployed agent calls
+  # instead of spawning a local subprocess.
+  mcp_targets:
+    - name: fraud-investigation-tools
+      source: src/mcp_server/server.py
+      auth: oauth2_client_credentials
+
+identity:
+  # AgentCore Identity issues each agent (Detection, Investigation) its own
+  # scoped identity, so the Investigation Agent's MCP tool calls are
+  # attributable and auditable per-agent - important for AML/compliance.
+  agent_identities:
+    - detection-agent
+    - investigation-agent
+
+observability:
+  enabled: true
+  tracing: opentelemetry

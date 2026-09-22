@@ -1,0 +1,58 @@
+[
+  {
+    "case_id": "FC-1001",
+    "pattern": "Multiple rapid small-value transactions across different merchant categories within a 10-minute window, followed by one large withdrawal.",
+    "typology": "card_testing_then_cashout",
+    "risk_notes": "Classic card-testing pattern where a stolen card is validated with small purchases before a large fraudulent withdrawal.",
+    "resolution": "Confirmed fraud. Card blocked, chargeback issued, case referred to card network."
+  },
+  {
+    "case_id": "FC-1002",
+    "pattern": "Wire transfer to a newly added beneficiary in a high-risk jurisdiction, initiated minutes after a password reset.",
+    "typology": "account_takeover",
+    "risk_notes": "Password reset immediately followed by high-value outbound wire is a strong account takeover signal.",
+    "resolution": "Confirmed fraud. Account locked, transfer reversed where possible, customer notified."
+  },
+  {
+    "case_id": "FC-1003",
+    "pattern": "Series of structured cash deposits each just under the $10,000 reporting threshold across multiple branches in one week.",
+    "typology": "structuring_smurfing",
+    "risk_notes": "Deposits deliberately kept under CTR threshold across branches is a textbook structuring/smurfing pattern under AML rules.",
+    "resolution": "Escalated to AML compliance, SAR filed."
+  },
+  {
+    "case_id": "FC-1004",
+    "pattern": "Transaction from a device and IP address never previously associated with the account, geolocated in a different country than the customer's home address.",
+    "typology": "device_ip_anomaly",
+    "risk_notes": "New device + new geography combined is a moderate-risk signal, especially without a corresponding travel notification.",
+    "resolution": "Flagged for step-up authentication. Customer verified travel; case cleared."
+  },
+  {
+    "case_id": "FC-1005",
+    "pattern": "Sudden spike in transaction volume for a merchant account previously processing low, stable volumes, with several disputed chargebacks in the same week.",
+    "typology": "merchant_fraud",
+    "risk_notes": "Sharp volume spikes combined with chargeback clustering often indicate a compromised or complicit merchant account.",
+    "resolution": "Merchant account suspended pending investigation."
+  },
+  {
+    "case_id": "FC-1006",
+    "pattern": "Repeated failed login attempts followed by a successful login and an immediate change to contact email and phone number.",
+    "typology": "account_takeover",
+    "risk_notes": "Credential stuffing followed by contact info changes is a precursor to locking the real owner out before further fraud.",
+    "resolution": "Confirmed fraud. Contact changes reverted, account secured, customer notified via out-of-band channel."
+  },
+  {
+    "case_id": "FC-1007",
+    "pattern": "Round-dollar wire transfers sent to multiple beneficiaries who share the same registered address.",
+    "typology": "money_mule_network",
+    "risk_notes": "Multiple beneficiaries at one address receiving round-dollar transfers is consistent with a money mule network.",
+    "resolution": "Escalated to AML compliance, beneficiary accounts flagged network-wide."
+  },
+  {
+    "case_id": "FC-1008",
+    "pattern": "Customer transaction matched a name on a periodically updated sanctions watchlist during real-time screening.",
+    "typology": "sanctions_hit",
+    "risk_notes": "Any positive sanctions list match requires an immediate hold and manual compliance review regardless of transaction size.",
+    "resolution": "Transaction held, compliance review confirmed false positive due to common name; released after manual clearance."
+  }
+]

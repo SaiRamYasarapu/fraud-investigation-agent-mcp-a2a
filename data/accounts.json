@@ -1,0 +1,38 @@
+{
+  "ACC-3001": {
+    "customer_name": "J. Alvarez",
+    "account_open_date": "2018-03-14",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 42,
+    "recent_password_reset": true,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3002": {
+    "customer_name": "M. Chen",
+    "account_open_date": "2022-11-02",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 15,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3003": {
+    "customer_name": "R. Okafor",
+    "account_open_date": "2024-06-20",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 8,
+    "recent_password_reset": true,
+    "kyc_status": "pending_review",
+    "risk_tier": "elevated"
+  },
+  "ACC-3004": {
+    "customer_name": "Viktor Rennko",
+    "account_open_date": "2025-01-09",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 3,
+    "recent_password_reset": false,
+    "kyc_status": "pending_review",
+    "risk_tier": "elevated"
+  }
+}
