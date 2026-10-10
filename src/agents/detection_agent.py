@@ -6,9 +6,15 @@ also calls the Investigation Agent via A2A client to get the account info, the K
 the sanctions screen status as well. After gathering all this information, it uses a live LLM,
 or a predetermined class, RuleBasedFraudReasoner, to return a verdict and rationale.
 """
-from src.vector_store.retriever import FraudCaseRetriever
+from src.agents.a2a_protocol import (
+    A2AClient,
+    A2AServer,
+    A2ATask,
+    A2ATaskResult,
+    AgentCard,
+)
 from src.llm.bedrock_client import BedrockLLM
-from src.agents.a2a_protocol import AgentCard, A2AServer, A2AClient, A2ATask, A2ATaskResult
+from src.vector_store.retriever import FraudCaseRetriever
 
 SYSTEM_PROMPT = (
     "You are a fraud detection analyst. Given a transaction description and "

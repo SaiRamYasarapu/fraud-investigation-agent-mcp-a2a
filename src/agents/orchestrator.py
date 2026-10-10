@@ -8,9 +8,9 @@ Amazon Bedrock AgentCore Runtime, with AgentCore Memory persisting `state`
 across turns of a multi-turn investigation.
 """
 import json
-from typing import TypedDict, Optional
+from typing import TypedDict
 
-from langgraph.graph import StateGraph, END
+from langgraph.graph import END, StateGraph
 
 from src.agents.detection_agent import DetectionAgent
 from src.agents.investigation_agent import InvestigationAgent
@@ -19,10 +19,10 @@ from src.agents.investigation_agent import InvestigationAgent
 class InvestigationState(TypedDict):
     transaction_description: str
     account_id: str
-    detection_output: Optional[dict]
-    verdict: Optional[str]
-    rationale: Optional[str]
-    final_action: Optional[str]
+    detection_output: dict | None
+    verdict: str | None
+    rationale: str | None
+    final_action: str | None
 
 
 def build_graph():

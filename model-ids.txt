@@ -1,0 +1,11 @@
+HAIKU (development):
+us.anthropic.claude-haiku-4-5-20251001-v1:0
+
+SONNET (demo):
+us.anthropic.claude-sonnet-5-5
+
+TITAN EMBEDDINGS:
+amazon.titan-embed-text-v2:0
+
+REGION: us-west-2
+AWS PROFILE: fraud-agent

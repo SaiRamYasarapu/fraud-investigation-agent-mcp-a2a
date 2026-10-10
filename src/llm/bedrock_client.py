@@ -13,8 +13,9 @@ would receive. This is our default mode when running offline. To go live, we jus
 credentials, BEDROCK_MODEL_ID, and should flip USE_LIVE_BEDROCK to true.
 
 """
-import os
 import json
+import os
+from typing import ClassVar
 
 USE_LIVE_BEDROCK = os.environ.get("USE_LIVE_BEDROCK", "false").lower() == "true"
 BEDROCK_MODEL_ID = os.environ.get(
@@ -56,7 +57,7 @@ class RuleBasedFraudReasoner:
     """used only when USE_LIVE_BEDROCK is False. Produces a verdict using simple keyword/score
     heuristics over the same retrieved-case and tool-result data."""
 
-    HIGH_RISK_TYPOLOGIES = {
+    HIGH_RISK_TYPOLOGIES: ClassVar[set[str]] = {
         "account_takeover",
         "sanctions_hit",
         "structuring_smurfing",

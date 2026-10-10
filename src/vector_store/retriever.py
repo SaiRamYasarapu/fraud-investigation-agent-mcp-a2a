@@ -9,8 +9,8 @@ point. Agents depend only on this, not on the internals, so swapping the retriev
 wouldn't require any agent code to be updated.
 """
 import json
-from pathlib import Path
 from dataclasses import dataclass
+from pathlib import Path
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity

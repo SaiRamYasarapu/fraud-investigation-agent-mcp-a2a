@@ -9,6 +9,10 @@ Simulates three transactions being investigated by the two-agent system:
 Run: python3 main.py
 """
 import json
+from dotenv import load_dotenv
+load_dotenv()
+
+
 from src.agents.orchestrator import build_graph
 
 SCENARIOS = [

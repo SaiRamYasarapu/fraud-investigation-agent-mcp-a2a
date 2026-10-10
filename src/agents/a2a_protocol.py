@@ -28,10 +28,11 @@ A2A Client and A2A Server, not the agents themselves. You can see this in PRODUC
 
 
 from __future__ import annotations
+
 import uuid
-import queue
-from dataclasses import dataclass, field
-from typing import Callable
+from collections.abc import Callable
+from dataclasses import dataclass
+from typing import ClassVar
 
 
 @dataclass
@@ -69,7 +70,7 @@ class A2AServer:
     """Registers an agent's handler under its AgentCard so other agents
     can address it by agent_id."""
 
-    _registry: dict[str, "A2AServer"] = {}
+    _registry: ClassVar[dict[str, A2AServer]] = {}
 
     def __init__(self, card: AgentCard, handler: Callable[[A2ATask], A2ATaskResult]):
         self.card = card
@@ -77,7 +78,7 @@ class A2AServer:
         A2AServer._registry[card.agent_id] = self
 
     @classmethod
-    def resolve(cls, agent_id: str) -> "A2AServer":
+    def resolve(cls, agent_id: str) -> A2AServer:
         if agent_id not in cls._registry:
             raise ValueError(f"No A2A agent registered with id '{agent_id}'")
         return cls._registry[agent_id]

@@ -7,8 +7,8 @@ when the typology given by the Detection Agent via A2A matches "sanctions_hit," 
 if an account was actually found while using the account lookup tool.
 
 """
+from src.agents.a2a_protocol import A2AServer, A2ATask, A2ATaskResult, AgentCard
 from src.agents.mcp_client import MCPToolClient
-from src.agents.a2a_protocol import AgentCard, A2AServer, A2ATask, A2ATaskResult
 
 
 class InvestigationAgent:
