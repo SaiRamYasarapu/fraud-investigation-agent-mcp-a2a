@@ -34,5 +34,194 @@
     "recent_password_reset": false,
     "kyc_status": "pending_review",
     "risk_tier": "elevated"
+  },
+  "ACC-3005": {
+    "customer_name": "Priya Natarajan",
+    "account_open_date": "2016-08-22",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 55,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3006": {
+    "customer_name": "Daniel Brooks",
+    "account_open_date": "2023-12-05",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 6,
+    "recent_password_reset": true,
+    "kyc_status": "verified",
+    "risk_tier": "elevated"
+  },
+  "ACC-3007": {
+    "customer_name": "Grace Whitfield",
+    "account_open_date": "2009-04-17",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 30,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3008": {
+    "customer_name": "Tomasz Nowak",
+    "account_open_date": "2025-07-30",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 2,
+    "recent_password_reset": false,
+    "kyc_status": "pending_review",
+    "risk_tier": "elevated"
+  },
+  "ACC-3009": {
+    "customer_name": "Aisha Bello",
+    "account_open_date": "2021-02-11",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 24,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3010": {
+    "customer_name": "Kevin Mercer",
+    "account_open_date": "2025-09-01",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 1,
+    "recent_password_reset": true,
+    "kyc_status": "unverified",
+    "risk_tier": "high"
+  },
+  "ACC-3011": {
+    "customer_name": "Harbor Lane Bakery LLC",
+    "account_open_date": "2014-05-06",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 310,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3012": {
+    "customer_name": "Luis Ortega",
+    "account_open_date": "2019-10-28",
+    "home_country": "MX",
+    "avg_monthly_txn_volume": 18,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3013": {
+    "customer_name": "Emily Carter",
+    "account_open_date": "2024-03-14",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 9,
+    "recent_password_reset": true,
+    "kyc_status": "verified",
+    "risk_tier": "elevated"
+  },
+  "ACC-3014": {
+    "customer_name": "Coastal Imports Group",
+    "account_open_date": "2025-05-19",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 120,
+    "recent_password_reset": false,
+    "kyc_status": "pending_review",
+    "risk_tier": "high"
+  },
+  "ACC-3015": {
+    "customer_name": "Margaret Hughes",
+    "account_open_date": "1998-01-09",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 12,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3016": {
+    "customer_name": "Samuel Adeyemi",
+    "account_open_date": "2025-08-12",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 4,
+    "recent_password_reset": false,
+    "kyc_status": "unverified",
+    "risk_tier": "high"
+  },
+  "ACC-3017": {
+    "customer_name": "Lina Haddad",
+    "account_open_date": "2020-06-03",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 21,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3018": {
+    "customer_name": "Brightpath Tutoring Inc",
+    "account_open_date": "2022-01-25",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 64,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3019": {
+    "customer_name": "Viktor Renko",
+    "account_open_date": "2023-04-02",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 11,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3020": {
+    "customer_name": "Hannah Weiss",
+    "account_open_date": "2017-11-15",
+    "home_country": "DE",
+    "avg_monthly_txn_volume": 16,
+    "recent_password_reset": true,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3021": {
+    "customer_name": "Marcus Lee",
+    "account_open_date": "2025-06-21",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 3,
+    "recent_password_reset": false,
+    "kyc_status": "pending_review",
+    "risk_tier": "elevated"
+  },
+  "ACC-3022": {
+    "customer_name": "Amara Solís",
+    "account_open_date": "2018-09-07",
+    "home_country": "ES",
+    "avg_monthly_txn_volume": 14,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3023": {
+    "customer_name": "Owen Fitzgerald",
+    "account_open_date": "2012-03-30",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 40,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
+  },
+  "ACC-3024": {
+    "customer_name": "Nadia Petrova",
+    "account_open_date": "2025-02-27",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 7,
+    "recent_password_reset": true,
+    "kyc_status": "pending_review",
+    "risk_tier": "elevated"
+  },
+  "ACC-3025": {
+    "customer_name": "Ridgeway Auto Parts",
+    "account_open_date": "2016-10-11",
+    "home_country": "US",
+    "avg_monthly_txn_volume": 220,
+    "recent_password_reset": false,
+    "kyc_status": "verified",
+    "risk_tier": "standard"
   }
 }

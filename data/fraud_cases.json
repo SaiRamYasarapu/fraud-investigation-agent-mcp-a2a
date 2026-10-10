@@ -54,5 +54,369 @@
     "typology": "sanctions_hit",
     "risk_notes": "Any positive sanctions list match requires an immediate hold and manual compliance review regardless of transaction size.",
     "resolution": "Transaction held, compliance review confirmed false positive due to common name; released after manual clearance."
+  },
+  {
+    "case_id": "FC-1009",
+    "pattern": "Customer's mobile number was ported to a new carrier, and within an hour the online banking password was reset using an SMS code and a large transfer was sent to an external account.",
+    "typology": "account_takeover",
+    "risk_notes": "SIM swap gives the fraudster control of SMS one-time codes; a number port immediately before a password reset is a high-confidence takeover signal.",
+    "resolution": "Confirmed fraud. Account frozen, transfer recalled, customer re-verified in branch and moved to app-based authentication."
+  },
+  {
+    "case_id": "FC-1010",
+    "pattern": "Login from a new browser followed by addition of a new payee, an increase to the daily transfer limit, and a maximum-limit transfer, all within 15 minutes.",
+    "typology": "account_takeover",
+    "risk_notes": "Limit increase plus new payee plus max transfer in one short session is a classic takeover cash-out sequence.",
+    "resolution": "Confirmed fraud. Session terminated, payee removed, funds partially recovered from receiving bank."
+  },
+  {
+    "case_id": "FC-1011",
+    "pattern": "Customer's mailing address and email were changed online, and a replacement debit card was requested to the new address two days later.",
+    "typology": "account_takeover",
+    "risk_notes": "Contact change followed by a card reissue to the new address is used to intercept physical cards after taking over the profile.",
+    "resolution": "Confirmed fraud. Card cancelled before activation, contact details restored, customer notified by phone on file."
+  },
+  {
+    "case_id": "FC-1012",
+    "pattern": "Successful login after a password reset, followed by several balance checks and a transfer to a beneficiary added in the same session, from an IP associated with a known proxy service.",
+    "typology": "account_takeover",
+    "risk_notes": "Anonymizing proxy plus fresh beneficiary after a reset strongly indicates a compromised account.",
+    "resolution": "Confirmed fraud. Account locked, outbound wire stopped before settlement."
+  },
+  {
+    "case_id": "FC-1013",
+    "pattern": "Dozens of declined one-dollar authorization attempts on different card numbers from the same merchant terminal within minutes.",
+    "typology": "card_testing_then_cashout",
+    "risk_notes": "High-velocity low-value attempts across many cards at one terminal points to a compromised or fraudster-controlled merchant used for card testing.",
+    "resolution": "Confirmed fraud. Terminal blocked, affected card numbers reissued."
+  },
+  {
+    "case_id": "FC-1014",
+    "pattern": "Card used for three small online donations to unrelated charities, then for a high-value electronics purchase shipped to a freight forwarder.",
+    "typology": "card_testing_then_cashout",
+    "risk_notes": "Small charity payments are a common way to test stolen cards before a resellable purchase shipped to a forwarding address.",
+    "resolution": "Confirmed fraud. Order cancelled with merchant, card blocked and reissued."
+  },
+  {
+    "case_id": "FC-1015",
+    "pattern": "Several small subscription sign-ups on a newly issued card, followed by gift card purchases totalling over $2,000 the next morning.",
+    "typology": "card_testing_then_cashout",
+    "risk_notes": "Gift cards are a preferred cash-out route because they are fast and hard to trace after a card has been validated.",
+    "resolution": "Confirmed fraud. Gift cards voided where possible, chargeback filed."
+  },
+  {
+    "case_id": "FC-1016",
+    "pattern": "Customer made nine cash deposits between $8,500 and $9,800 at ATMs over five days, then wired the combined balance overseas.",
+    "typology": "structuring_smurfing",
+    "risk_notes": "Repeated deposits just under the reporting threshold followed by a consolidated outbound wire is consistent with structuring and layering.",
+    "resolution": "Escalated to AML compliance, SAR filed, account placed under enhanced monitoring."
+  },
+  {
+    "case_id": "FC-1017",
+    "pattern": "Several different individuals deposited cash just below $10,000 into the same business account on the same day at different branches.",
+    "typology": "structuring_smurfing",
+    "risk_notes": "Multiple depositors splitting cash into one account is classic smurfing designed to avoid currency transaction reports.",
+    "resolution": "Escalated to AML compliance, SAR filed."
+  },
+  {
+    "case_id": "FC-1018",
+    "pattern": "Customer repeatedly purchased money orders in amounts under $3,000 at different branches and deposited them into one account.",
+    "typology": "structuring_smurfing",
+    "risk_notes": "Money orders kept under recordkeeping thresholds and consolidated into one account is a structuring variant.",
+    "resolution": "Escalated to AML compliance, SAR filed."
+  },
+  {
+    "case_id": "FC-1019",
+    "pattern": "Login from a device never seen before, located in another state, with a correct password but failed security questions.",
+    "typology": "device_ip_anomaly",
+    "risk_notes": "New device plus failed knowledge-based questions suggests the password may be compromised.",
+    "resolution": "Flagged for step-up authentication. Customer could not be reached; account restricted until verified."
+  },
+  {
+    "case_id": "FC-1020",
+    "pattern": "Mobile app login from an emulator rather than a physical phone, with device fingerprint changing on every session.",
+    "typology": "device_ip_anomaly",
+    "risk_notes": "Emulators with rotating fingerprints are used to evade device-based fraud controls.",
+    "resolution": "Confirmed fraud. Device fingerprints blocklisted, account secured."
+  },
+  {
+    "case_id": "FC-1021",
+    "pattern": "Customer logged in from a new country during a holiday period, and the travel notice on file matched the destination.",
+    "typology": "device_ip_anomaly",
+    "risk_notes": "Geography change is explained by a matching travel notice, so the risk signal is weak.",
+    "resolution": "Reviewed and cleared. No action required."
+  },
+  {
+    "case_id": "FC-1022",
+    "pattern": "Newly onboarded online merchant processed a high volume of transactions in its first week, mostly from cards issued abroad, with average ticket size far above its stated business type.",
+    "typology": "merchant_fraud",
+    "risk_notes": "Mismatch between stated business and actual card mix and ticket size suggests transaction laundering or a bust-out merchant.",
+    "resolution": "Merchant payouts held, account suspended pending investigation."
+  },
+  {
+    "case_id": "FC-1023",
+    "pattern": "Merchant refunded many transactions to cards different from the ones originally charged.",
+    "typology": "merchant_fraud",
+    "risk_notes": "Refunds to different cards move money out of the merchant account and are a known merchant fraud technique.",
+    "resolution": "Confirmed fraud. Merchant terminated, refunds reversed, case referred to card network."
+  },
+  {
+    "case_id": "FC-1024",
+    "pattern": "Restaurant merchant's daily card volume tripled overnight with most transactions keyed in manually instead of swiped or tapped.",
+    "typology": "merchant_fraud",
+    "risk_notes": "Manual key entry at a card-present merchant is a sign of stolen card numbers being run through the terminal.",
+    "resolution": "Merchant account suspended, investigation found compromised terminal credentials."
+  },
+  {
+    "case_id": "FC-1025",
+    "pattern": "Student account with low historic activity received several incoming transfers from unrelated senders and forwarded almost all funds out within 24 hours.",
+    "typology": "money_mule_network",
+    "risk_notes": "Rapid in-and-out movement through a low-activity account is a strong money mule indicator.",
+    "resolution": "Escalated to AML compliance, account closed, customer interviewed and identified as a recruited mule."
+  },
+  {
+    "case_id": "FC-1026",
+    "pattern": "Customer received a large deposit described as a job payment, then sent most of it to cryptocurrency exchanges in several smaller transfers.",
+    "typology": "money_mule_network",
+    "risk_notes": "Fake job schemes recruit mules to receive funds and convert them to crypto.",
+    "resolution": "Escalated to AML compliance, SAR filed."
+  },
+  {
+    "case_id": "FC-1027",
+    "pattern": "Several newly opened accounts shared the same phone number and device, each receiving and forwarding similar amounts.",
+    "typology": "money_mule_network",
+    "risk_notes": "Shared device and phone across accounts indicates a coordinated mule network controlled by one operator.",
+    "resolution": "Accounts frozen, network linked and reported, SAR filed."
+  },
+  {
+    "case_id": "FC-1028",
+    "pattern": "Account received transfers from three customers who had each reported romance scams, then forwarded funds abroad.",
+    "typology": "money_mule_network",
+    "risk_notes": "Receiving proceeds from known scam victims is direct evidence of mule activity.",
+    "resolution": "Account frozen, funds returned to victims where possible, SAR filed."
+  },
+  {
+    "case_id": "FC-1029",
+    "pattern": "Outbound wire listed a beneficiary bank in a comprehensively sanctioned country, routed through an intermediary bank.",
+    "typology": "sanctions_hit",
+    "risk_notes": "Routing through an intermediary does not remove sanctions exposure; transactions involving sanctioned jurisdictions require a hold.",
+    "resolution": "Transaction blocked and reported to compliance as required."
+  },
+  {
+    "case_id": "FC-1030",
+    "pattern": "Customer name partially matched a sanctions list entry with a different date of birth and nationality.",
+    "typology": "sanctions_hit",
+    "risk_notes": "Partial name matches need manual review; differing date of birth and nationality usually indicate a false positive.",
+    "resolution": "Reviewed by compliance, confirmed false positive, transaction released."
+  },
+  {
+    "case_id": "FC-1031",
+    "pattern": "Payment to a company whose registered owner matched an entity on a sanctions list.",
+    "typology": "sanctions_hit",
+    "risk_notes": "Entities owned by sanctioned parties can themselves be subject to sanctions and require a hold.",
+    "resolution": "Transaction held, compliance confirmed ownership link, funds blocked and reported."
+  },
+  {
+    "case_id": "FC-1032",
+    "pattern": "Trade finance payment referenced shipping goods to a port in a sanctioned region, although the beneficiary was not listed.",
+    "typology": "sanctions_hit",
+    "risk_notes": "Sanctions risk can come from goods, vessels or destinations, not only from listed names.",
+    "resolution": "Escalated to sanctions compliance, enhanced due diligence requested before release."
+  },
+  {
+    "case_id": "FC-1033",
+    "pattern": "New account opened with a Social Security number issued recently but a date of birth showing the applicant is 40 years old, with a credit file only a few months old.",
+    "typology": "synthetic_identity",
+    "risk_notes": "Mismatch between SSN issuance and age plus a thin, new credit file is typical of synthetic identities.",
+    "resolution": "Application declined, identity referred to fraud prevention team."
+  },
+  {
+    "case_id": "FC-1034",
+    "pattern": "Customer built good credit over 18 months with small balances, then maxed out all credit lines in one week and stopped paying.",
+    "typology": "synthetic_identity",
+    "risk_notes": "Long nurturing followed by a sudden bust-out is the classic synthetic identity monetization pattern.",
+    "resolution": "Confirmed fraud. Accounts charged off and identity flagged across products."
+  },
+  {
+    "case_id": "FC-1035",
+    "pattern": "Several applications used the same address and phone number but different names and Social Security numbers.",
+    "typology": "synthetic_identity",
+    "risk_notes": "Shared contact details across different identities indicates fabricated or manipulated identities.",
+    "resolution": "Applications declined, linked identities blocklisted."
+  },
+  {
+    "case_id": "FC-1036",
+    "pattern": "Customer disputed several online purchases as unauthorized although device, IP and delivery address matched the customer's own history.",
+    "typology": "first_party_fraud",
+    "risk_notes": "Disputes on transactions that match the customer's own device and address suggest friendly fraud.",
+    "resolution": "Dispute denied with evidence, account noted for future dispute review."
+  },
+  {
+    "case_id": "FC-1037",
+    "pattern": "Customer deposited a large check, withdrew most of the funds the same day, and the check was returned as drawn on a closed account.",
+    "typology": "first_party_fraud",
+    "risk_notes": "Withdrawing funds before a check clears and the check bouncing indicates deliberate deposit fraud.",
+    "resolution": "Account closed, loss sent to recovery."
+  },
+  {
+    "case_id": "FC-1038",
+    "pattern": "Elderly customer sent a large wire to a new payee after receiving a phone call from someone claiming to be the bank's fraud department.",
+    "typology": "authorized_push_payment_scam",
+    "risk_notes": "Impersonation of the bank to make the customer move money to a safe account is a common authorized push payment scam.",
+    "resolution": "Payment recalled with partial recovery, customer educated, case reported."
+  },
+  {
+    "case_id": "FC-1039",
+    "pattern": "Customer paid a deposit for a rental property to a new account after seeing an online listing, then reported the landlord unreachable.",
+    "typology": "authorized_push_payment_scam",
+    "risk_notes": "Fake rental listings pressure victims into paying deposits before viewing the property.",
+    "resolution": "Recall request sent to receiving bank, receiving account reported as a mule."
+  },
+  {
+    "case_id": "FC-1040",
+    "pattern": "Customer sent several transfers to an investment platform promising guaranteed returns, increasing amounts each week.",
+    "typology": "authorized_push_payment_scam",
+    "risk_notes": "Escalating transfers to a high-return investment platform are a sign of an investment scam.",
+    "resolution": "Customer contacted, further payments stopped, case reported."
+  },
+  {
+    "case_id": "FC-1041",
+    "pattern": "Elderly customer's account showed large cash withdrawals accompanied by a new person who did most of the talking at the branch.",
+    "typology": "elder_financial_exploitation",
+    "risk_notes": "A third party directing transactions and unusual cash withdrawals by an elderly customer indicates possible exploitation.",
+    "resolution": "Branch escalated to protective services, account placed under review."
+  },
+  {
+    "case_id": "FC-1042",
+    "pattern": "A recently added joint account holder on an elderly customer's account began transferring funds to their own account.",
+    "typology": "elder_financial_exploitation",
+    "risk_notes": "New joint holders moving funds out is a recognized pattern of elder financial abuse.",
+    "resolution": "Transfers restricted, customer interviewed privately, case referred to adult protective services."
+  },
+  {
+    "case_id": "FC-1043",
+    "pattern": "Business customer changed a supplier's bank details after an email request, then paid a large invoice to the new account.",
+    "typology": "business_email_compromise",
+    "risk_notes": "Bank detail changes requested only by email, without verification by phone, are the core of business email compromise.",
+    "resolution": "Payment recalled, partial recovery, customer advised to verify changes by phone."
+  },
+  {
+    "case_id": "FC-1044",
+    "pattern": "Finance employee received an urgent email appearing to come from the CEO asking for a confidential wire to a new overseas account.",
+    "typology": "business_email_compromise",
+    "risk_notes": "Urgency, secrecy and a new beneficiary in an executive request are typical of CEO-impersonation fraud.",
+    "resolution": "Wire stopped before release after callback verification failed."
+  },
+  {
+    "case_id": "FC-1045",
+    "pattern": "Customer's payroll account was updated to route an employee's salary to a new bank following an email from a lookalike domain.",
+    "typology": "business_email_compromise",
+    "risk_notes": "Payroll diversion through spoofed emails is a common business email compromise variant.",
+    "resolution": "Payroll change reversed, employee paid correctly, domain reported."
+  },
+  {
+    "case_id": "FC-1046",
+    "pattern": "Customer received refunds for returned items more than 20 times in two months, with returned packages found to contain different, cheaper goods.",
+    "typology": "refund_abuse",
+    "risk_notes": "Repeated refunds with swapped items indicate organized refund abuse.",
+    "resolution": "Refunds stopped, merchant account flagged, customer banned by merchant."
+  },
+  {
+    "case_id": "FC-1047",
+    "pattern": "Customer claimed non-delivery on many online orders although tracking showed delivery with signature at the customer's address.",
+    "typology": "refund_abuse",
+    "risk_notes": "Repeated item-not-received claims contradicted by delivery evidence point to refund fraud.",
+    "resolution": "Claims denied, customer flagged for future dispute review."
+  },
+  {
+    "case_id": "FC-1048",
+    "pattern": "Customer deposited checks between two of their own accounts at different banks repeatedly before either cleared.",
+    "typology": "check_kiting",
+    "risk_notes": "Moving checks between banks to inflate balances before clearing is check kiting.",
+    "resolution": "Accounts restricted, losses recovered, case referred to recovery."
+  },
+  {
+    "case_id": "FC-1049",
+    "pattern": "Mobile deposit of a check that had already been deposited at another bank the previous day.",
+    "typology": "duplicate_deposit",
+    "risk_notes": "Depositing the same check at two institutions is a duplicate presentment fraud.",
+    "resolution": "Second deposit reversed, customer warned."
+  },
+  {
+    "case_id": "FC-1050",
+    "pattern": "Customer's online banking was accessed shortly after the customer reported a phishing text message about a locked account.",
+    "typology": "account_takeover",
+    "risk_notes": "Phishing links that capture login credentials are a common takeover entry point.",
+    "resolution": "Confirmed fraud. Password reset, devices revoked, small unauthorized transfer reversed."
+  },
+  {
+    "case_id": "FC-1051",
+    "pattern": "New payee added and immediately paid from an account whose owner was hospitalized according to a recent note on file.",
+    "typology": "account_takeover",
+    "risk_notes": "Activity on the account of a customer known to be unavailable suggests misuse by someone else.",
+    "resolution": "Confirmed fraud. Payment recalled, account secured, family contacted through authorized representative."
+  },
+  {
+    "case_id": "FC-1052",
+    "pattern": "Large wire to a new beneficiary abroad initiated by a customer purchasing a home overseas, with supporting documents provided before the transfer.",
+    "typology": "benign_lookalike",
+    "risk_notes": "High-value international wire to a new payee looks risky, but documentation and normal login behavior support legitimacy.",
+    "resolution": "Reviewed and cleared. Wire released."
+  },
+  {
+    "case_id": "FC-1053",
+    "pattern": "Small business deposited cash just under $10,000 once a week, consistent with its daily sales records over several years.",
+    "typology": "benign_lookalike",
+    "risk_notes": "Deposits near the threshold are explained by a stable, long-running business pattern, not deliberate structuring.",
+    "resolution": "Reviewed and cleared. Pattern documented for future reference."
+  },
+  {
+    "case_id": "FC-1054",
+    "pattern": "Customer reset their password after forgetting it and then paid their regular monthly bills to existing payees.",
+    "typology": "benign_lookalike",
+    "risk_notes": "A password reset alone is not suspicious when followed only by routine payments to known payees.",
+    "resolution": "No action required."
+  },
+  {
+    "case_id": "FC-1055",
+    "pattern": "Customer bought groceries at their usual store, in line with past spending, from their regular phone and home location.",
+    "typology": "benign_lookalike",
+    "risk_notes": "Activity fully matches the customer's established behavior.",
+    "resolution": "No action required."
+  },
+  {
+    "case_id": "FC-1056",
+    "pattern": "Spike in card transactions abroad while the customer was on a business trip that matched a travel notice on file.",
+    "typology": "benign_lookalike",
+    "risk_notes": "Foreign spending is explained by documented travel.",
+    "resolution": "Reviewed and cleared."
+  },
+  {
+    "case_id": "FC-1057",
+    "pattern": "Customer's name matched a common name on a sanctions list, but date of birth, address and nationality all differed.",
+    "typology": "benign_lookalike",
+    "risk_notes": "Name-only matches with different identifiers are common false positives in sanctions screening.",
+    "resolution": "Reviewed by compliance, confirmed false positive, released."
+  },
+  {
+    "case_id": "FC-1058",
+    "pattern": "Merchant's sales volume increased sharply during a holiday season, consistent with the previous year's seasonal pattern.",
+    "typology": "benign_lookalike",
+    "risk_notes": "Seasonal peaks that repeat year over year are expected and not a fraud indicator.",
+    "resolution": "Reviewed and cleared."
+  },
+  {
+    "case_id": "FC-1059",
+    "pattern": "Customer sent money to a new payee who was a family member, confirmed by the customer during a callback.",
+    "typology": "benign_lookalike",
+    "risk_notes": "New payee risk is mitigated by successful out-of-band confirmation with the customer.",
+    "resolution": "Reviewed and cleared."
+  },
+  {
+    "case_id": "FC-1060",
+    "pattern": "Customer logged in from a new phone after upgrading their device and completed step-up verification successfully.",
+    "typology": "benign_lookalike",
+    "risk_notes": "A new device is expected after an upgrade when strong verification succeeds.",
+    "resolution": "No action required."
   }
 ]
