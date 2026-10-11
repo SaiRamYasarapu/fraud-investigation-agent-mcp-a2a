@@ -1,2 +1,5 @@
 [tool.ruff.lint]
 ignore = ["SIM117"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
