@@ -62,7 +62,7 @@ def test_titan_cache_embeds_each_text_only_once(tmp_path):
     first.embed(["alpha", "beta"])
     assert first.calls_made == 2
 
-    # A new embedder reads the cache from disk: no new calls for known text,
+    # On a new run the embedder reads the cache from disk: no new calls for known text,
     # one call for the new text.
     second = TitanEmbedder(cache_dir=tmp_path, embed_fn=fake_embedding)
     second.embed(["alpha", "beta", "gamma"])
