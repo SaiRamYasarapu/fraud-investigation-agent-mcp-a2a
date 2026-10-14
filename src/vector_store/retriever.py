@@ -18,6 +18,7 @@ Similarity is cosine similarity.
 from __future__ import annotations
 
 import json
+import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -141,6 +142,33 @@ class PolicyRetriever:
             c = self.chunks[i]
             results.append(PolicyChunk(c.chunk_id, c.source, c.section, c.text, round(score, 4)))
         return results
+
+
+def _backend() -> str:
+    """RETRIEVAL_BACKEND picks where search runs: "memory" (default) or "pgvector"."""
+    backend = os.environ.get("RETRIEVAL_BACKEND", "memory").strip().lower()
+    if backend not in ("memory", "pgvector"):
+        raise ValueError(f"RETRIEVAL_BACKEND must be 'memory' or 'pgvector', got {backend!r}")
+    return backend
+
+
+def get_case_retriever():
+    """Case retriever for the configured backend. Both have the same retrieve()."""
+    if _backend() == "pgvector":
+        # Imported here, not at the top: pg_store imports this module.
+        from src.vector_store.pg_store import PgCaseRetriever
+
+        return PgCaseRetriever()
+    return FraudCaseRetriever()
+
+
+def get_policy_retriever():
+    """Policy retriever for the configured backend. Both have the same retrieve()."""
+    if _backend() == "pgvector":
+        from src.vector_store.pg_store import PgPolicyRetriever
+
+        return PgPolicyRetriever()
+    return PolicyRetriever()
 
 
 if __name__ == "__main__":

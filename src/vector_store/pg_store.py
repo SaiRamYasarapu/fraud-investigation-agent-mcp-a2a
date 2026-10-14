@@ -64,6 +64,26 @@ class PgVectorStore:
         ]
 
 
+class PgCaseRetriever:
+    """Same retrieve() as FraudCaseRetriever, but the search runs in pgvector."""
+
+    def __init__(self, store: PgVectorStore | None = None):
+        self.store = store or PgVectorStore()
+
+    def retrieve(self, query: str, top_k: int = 3) -> list[RetrievedCase]:
+        return self.store.search_cases(query, top_k)
+
+
+class PgPolicyRetriever:
+    """Same retrieve() as PolicyRetriever, but the search runs in pgvector."""
+
+    def __init__(self, store: PgVectorStore | None = None):
+        self.store = store or PgVectorStore()
+
+    def retrieve(self, query: str, top_k: int = 3) -> list[PolicyChunk]:
+        return self.store.search_policies(query, top_k)
+
+
 if __name__ == "__main__":
     from dotenv import load_dotenv
 

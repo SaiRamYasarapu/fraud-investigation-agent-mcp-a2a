@@ -10,7 +10,12 @@ import numpy as np
 import pytest
 
 from src.vector_store.embeddings import LocalTfidfEmbedder, TitanEmbedder
-from src.vector_store.retriever import FraudCaseRetriever, PolicyRetriever
+from src.vector_store.retriever import (
+    FraudCaseRetriever,
+    PolicyRetriever,
+    get_case_retriever,
+    get_policy_retriever,
+)
 
 
 def local_cases():
@@ -82,3 +87,26 @@ def test_live_titan_meaning_match():
     retriever = FraudCaseRetriever(embedder=TitanEmbedder())
     top = retriever.retrieve("credentials changed, then funds sent abroad to someone new")[0]
     assert top.typology == "account_takeover"
+
+
+def test_backend_defaults_to_memory(monkeypatch):
+    monkeypatch.delenv("RETRIEVAL_BACKEND", raising=False)
+    monkeypatch.setenv("EMBEDDINGS_MODE", "local")
+    assert isinstance(get_case_retriever(), FraudCaseRetriever)
+    assert isinstance(get_policy_retriever(), PolicyRetriever)
+
+
+def test_unknown_backend_is_rejected(monkeypatch):
+    monkeypatch.setenv("RETRIEVAL_BACKEND", "elastic")
+    with pytest.raises(ValueError):
+        get_case_retriever()
+
+
+def test_pgvector_retriever_wraps_the_store():
+    from src.vector_store.pg_store import PgCaseRetriever
+
+    class FakeStore:
+        def search_cases(self, query, top_k):
+            return [("case", query, top_k)]
+
+    assert PgCaseRetriever(store=FakeStore()).retrieve("wire", top_k=2) == [("case", "wire", 2)]
