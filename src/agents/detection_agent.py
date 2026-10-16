@@ -14,7 +14,7 @@ from src.agents.a2a_protocol import (
     AgentCard,
 )
 from src.llm.bedrock_client import BedrockLLM
-from src.vector_store.retriever import get_case_retriever
+from src.vector_store.rerank import RerankedCaseRetriever
 
 SYSTEM_PROMPT = (
     "You are a fraud detection analyst. Given a transaction description and "
@@ -27,7 +27,7 @@ class DetectionAgent:
     AGENT_ID = "detection-agent"
 
     def __init__(self):
-        self.retriever = get_case_retriever()
+        self.retriever = RerankedCaseRetriever()
         self.llm = BedrockLLM()
         self.a2a = A2AClient(from_agent_id=self.AGENT_ID)
         # Registers this agent so InvestigationAgent can reach it via A2A.
