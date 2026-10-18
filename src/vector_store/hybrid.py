@@ -44,11 +44,10 @@ def tokenize(text: str) -> list[str]:
 
 
 class BM25:
-    """Okapi BM25 keyword scoring over a fixed list of documents.
-
-    k1 limits how much a word repeated in one document can add, and b sets how
-    much longer documents are penalised. IDF gives rare words more weight than
-    common ones."""
+    """BM25 ranks documents by keyword match, weighing three things: rare
+    words count more than common ones, repeated words help but flatten fast
+    (k1 controls that), and it adjusts for document length so long docs don't
+    win on size alone (b controls that). Written from scratch, no imported library used."""
 
     def __init__(self, docs: list[str], k1: float = 1.5, b: float = 0.75):
         self.k1, self.b = k1, b
