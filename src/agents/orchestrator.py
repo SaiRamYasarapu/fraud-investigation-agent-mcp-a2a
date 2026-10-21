@@ -8,6 +8,7 @@ Amazon Bedrock AgentCore Runtime, with AgentCore Memory persisting `state`
 across turns of a multi-turn investigation.
 """
 import json
+import re
 from typing import TypedDict
 
 from langgraph.graph import END, StateGraph
@@ -25,6 +26,26 @@ class InvestigationState(TypedDict):
     final_action: str | None
 
 
+VERDICTS = {"ESCALATE_COMPLIANCE_HOLD", "ESCALATE_HUMAN_REVIEW", "FLAG_FOR_REVIEW", "CLEAR"}
+
+
+def parse_verdict(raw: str) -> dict:
+    # A live model can wrap the JSON in extra text or a code fence, so take the
+    # first {...} block. If the reply still can't be read, route the case for
+    # review rather than clearing it.
+    match = re.search(r"\{.*\}", raw, re.DOTALL)
+    try:
+        parsed = json.loads(match.group(0)) if match else {}
+    except json.JSONDecodeError:
+        parsed = {}
+    if parsed.get("verdict") not in VERDICTS:
+        return {
+            "verdict": "FLAG_FOR_REVIEW",
+            "rationale": "The model's reply could not be read as a verdict, so the case is routed for review.",
+        }
+    return {"verdict": parsed["verdict"], "rationale": parsed.get("rationale", "")}
+
+
 def build_graph():
     # Instantiating both agents registers them with the A2A registry, so by
     # the time the graph runs, DetectionAgent can already reach
@@ -36,7 +57,7 @@ def build_graph():
         result = detection_agent.analyze(
             state["transaction_description"], state["account_id"]
         )
-        parsed = json.loads(result["verdict_raw"])
+        parsed = parse_verdict(result["verdict_raw"])
         return {
             **state,
             "detection_output": result,

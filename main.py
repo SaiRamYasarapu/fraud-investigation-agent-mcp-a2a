@@ -1,15 +1,18 @@
 """
 End-to-end demo runner.
 
-Simulates three transactions being investigated by the two-agent system:
+Simulates four transactions being investigated by the two-agent system:
   1. A clear account-takeover pattern (should escalate to human review)
-  2. A sanctions list match (should trigger a compliance hold)
-  3. A benign transaction (should clear)
+  2. A possible sanctions list match (should escalate to human review)
+  3. A confirmed sanctions list match (should trigger a compliance hold)
+  4. A benign transaction (should clear)
 
-Run: python3 main.py
+Run: python main.py
 """
 import json
+
 from dotenv import load_dotenv
+
 load_dotenv()
 
 
@@ -79,6 +82,10 @@ def main():
         print("\nTop retrieved historical cases (RAG over vector store):")
         for c in top_cases:
             print(f"  [{c['score']}] {c['case_id']} - {c['typology']}")
+
+        print("\nRelevant policy sections (RAG over policy documents):")
+        for p in result["detection_output"]["retrieved_policies"]:
+            print(f"  [{p['score']}] {p['source']} - {p['section']}")
 
         evidence = result["detection_output"]["account_evidence"]
         print("\nAccount evidence gathered via A2A -> MCP tool calls:")

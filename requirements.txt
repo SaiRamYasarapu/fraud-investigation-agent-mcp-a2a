@@ -14,3 +14,6 @@ boto3>=1.34
 # Vector database (Postgres + pgvector, used by the ingestion pipeline)
 psycopg[binary]>=3.2
 pgvector>=0.3
+
+# Loads AWS profile, region and mode settings from .env (used by main.py and evaluate.py)
+python-dotenv>=1.0

@@ -6,3 +6,4 @@ All data in this folder is **synthetic**. It was written for this project and do
 - `accounts.json` - 25 customer and business accounts used by the investigation tools.
 - `sanctions_list.json` - 20 sanctioned names. Some account names are close spelling variants of listed names, to test fuzzy matching.
 - `policies/` - 8 short internal policy documents for a fictional bank, used for policy retrieval.
+- `eval_queries.json` - 63 labelled search questions (paraphrase, exact case ID, look-alike, hard paraphrase) used to score retrieval with Recall@5, MRR and nDCG@5.

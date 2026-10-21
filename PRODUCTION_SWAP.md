@@ -1,48 +1,41 @@
 # Going from offline demo to live production
 
-This repo is built so each "demo shortcut" lives behind one interface, and
-swapping it doesn't touch agent logic. This doc lists exactly what to
-change and where.
+I built this repo so each "demo shortcut" lives behind one interface, and
+swapping it doesn't touch agent logic. This doc lists what I've already
+swapped, and exactly what to change and where for the rest.
 
-## 1. Vector store: TF-IDF -> Bedrock Titan Embeddings + Pinecone
+## 1. Vector store: done locally, next step is managed Postgres
 
-Replace `src/vector_store/retriever.py` internals. The `retrieve()` method
-signature stays the same, so `detection_agent.py` needs zero changes.
+Already built: Titan Text Embeddings V2 with a disk cache, PostgreSQL +
+pgvector (HNSW index), and an idempotent ingestion pipeline
+(src/vector_store/ingest.py). Switch it on with RETRIEVAL_BACKEND=pgvector.
 
-```python
-import boto3, json
-import pinecone
-
-bedrock = boto3.client("bedrock-runtime")
-pc = pinecone.Pinecone(api_key=os.environ["PINECONE_API_KEY"])
-index = pc.Index("fraud-cases")
-
-def embed(text: str) -> list[float]:
-    resp = bedrock.invoke_model(
-        modelId="amazon.titan-embed-text-v2:0",
-        body=json.dumps({"inputText": text}),
-    )
-    return json.loads(resp["body"].read())["embedding"]
-
-def retrieve(query: str, top_k: int = 3):
-    vec = embed(query)
-    results = index.query(vector=vec, top_k=top_k, include_metadata=True)
-    return [match["metadata"] for match in results["matches"]]
-```
+For production, I would move the database from local Docker to Amazon Aurora
+PostgreSQL (pgvector is supported there) and point DATABASE_URL at it. No code
+changes: the retriever interface stays the same, so detection_agent.py does
+not change.
 
 ## 2. LLM reasoning: rule-based -> live Bedrock
 
-Already built in - set env vars:
+Already built in. Set in .env:
 
 ```bash
-export USE_LIVE_BEDROCK=true
-export AWS_REGION=us-east-1
-export BEDROCK_MODEL_ID=anthropic.claude-3-5-sonnet-20241022-v2:0
+USE_LIVE_BEDROCK=true
+AWS_REGION=us-west-2
+BEDROCK_MODEL_ID=us.anthropic.claude-haiku-4-5-20251001-v1:0   # development
+# I switch to Sonnet for demos and final testing
 ```
 
 `src/llm/bedrock_client.py` picks this up automatically; no code changes.
 
-## 3. MCP: local stdio subprocess -> AgentCore Gateway
+## 3. Reranking: off -> Bedrock Rerank
+
+Already built in (src/vector_store/rerank.py). Set RERANK_MODE=bedrock to
+rerank the top 20 hybrid results with amazon.rerank-v1:0. If the call fails,
+the hybrid order is kept, so an investigation never stops on a reranking
+error.
+
+## 4. MCP: local stdio subprocess -> AgentCore Gateway
 
 `src/agents/mcp_client.py` currently spawns `src/mcp_server/server.py` as a
 subprocess. In production, register the same tool functions with AgentCore
@@ -64,7 +57,11 @@ class MCPToolClient:
                 ...
 ```
 
-## 4. A2A: in-process registry -> real agent services
+`MCPToolClient` also starts a new MCP server process for every tool call, so one
+investigation starts it two or three times. In production, I would keep one
+session open and reuse it for all the tool calls in an investigation.
+
+## 5. A2A: in-process registry -> real agent services
 
 `src/agents/a2a_protocol.py`'s `A2AServer`/`A2AClient` currently resolve
 in-process. To run Detection and Investigation as genuinely separate
@@ -73,7 +70,7 @@ POST to the other agent's AgentCore Runtime endpoint using the A2A
 JSON-RPC task schema, and run each agent as its own deployable (own
 Dockerfile / own AgentCore Runtime entry).
 
-## 5. Deploy
+## 6. Deploy
 
 ```bash
 agentcore configure --entrypoint main.py --name fraud-risk-investigation
