@@ -1,0 +1,540 @@
+[
+ {
+  "id": "Q01",
+  "kind": "paraphrase",
+  "query": "Dozens of one-dollar authorizations declined on different card numbers at a single terminal",
+  "relevant": [
+   "FC-1013"
+  ]
+ },
+ {
+  "id": "Q02",
+  "kind": "paraphrase",
+  "query": "Small donations to charities on a card, then an expensive electronics order shipped to a freight forwarder",
+  "relevant": [
+   "FC-1014"
+  ]
+ },
+ {
+  "id": "Q03",
+  "kind": "paraphrase",
+  "query": "Brand-new card used for a few cheap subscriptions, then more than two thousand dollars of gift cards",
+  "relevant": [
+   "FC-1015"
+  ]
+ },
+ {
+  "id": "Q04",
+  "kind": "paraphrase",
+  "query": "Phone number moved to another carrier, password reset by text message, then a big transfer out",
+  "relevant": [
+   "FC-1009"
+  ]
+ },
+ {
+  "id": "Q05",
+  "kind": "paraphrase",
+  "query": "Several failed sign-ins, then a successful one, and the contact email and phone were changed straight away",
+  "relevant": [
+   "FC-1006"
+  ]
+ },
+ {
+  "id": "Q06",
+  "kind": "paraphrase",
+  "query": "Sign-in from an unfamiliar browser, a payee added, the daily limit raised and the maximum sent within fifteen minutes",
+  "relevant": [
+   "FC-1010"
+  ]
+ },
+ {
+  "id": "Q07",
+  "kind": "paraphrase",
+  "query": "Mailing address and email updated online, then a replacement debit card ordered to the new address",
+  "relevant": [
+   "FC-1011"
+  ]
+ },
+ {
+  "id": "Q08",
+  "kind": "paraphrase",
+  "query": "Online banking accessed right after the customer got a phishing text saying their account was locked",
+  "relevant": [
+   "FC-1050"
+  ]
+ },
+ {
+  "id": "Q09",
+  "kind": "paraphrase",
+  "query": "New payee created and paid while the account holder was in hospital",
+  "relevant": [
+   "FC-1051"
+  ]
+ },
+ {
+  "id": "Q10",
+  "kind": "paraphrase",
+  "query": "Cash deposits at ATMs between 8,500 and 9,800 dollars over several days, then the total wired overseas",
+  "relevant": [
+   "FC-1016",
+   "FC-1003"
+  ]
+ },
+ {
+  "id": "Q11",
+  "kind": "paraphrase",
+  "query": "Different people depositing cash just below the reporting limit into one business account on the same day",
+  "relevant": [
+   "FC-1017"
+  ]
+ },
+ {
+  "id": "Q12",
+  "kind": "paraphrase",
+  "query": "Money orders under 3,000 dollars bought at several branches and deposited into one account",
+  "relevant": [
+   "FC-1018"
+  ]
+ },
+ {
+  "id": "Q13",
+  "kind": "paraphrase",
+  "query": "Mobile app used from an emulator with a device fingerprint that changes every session",
+  "relevant": [
+   "FC-1020"
+  ]
+ },
+ {
+  "id": "Q14",
+  "kind": "paraphrase",
+  "query": "Unknown device in another state, correct password but the security questions answered wrong",
+  "relevant": [
+   "FC-1019"
+  ]
+ },
+ {
+  "id": "Q15",
+  "kind": "paraphrase",
+  "query": "Newly signed-up online merchant with heavy first-week volume, mostly on foreign-issued cards",
+  "relevant": [
+   "FC-1022"
+  ]
+ },
+ {
+  "id": "Q16",
+  "kind": "paraphrase",
+  "query": "Merchant sending refunds to cards that were never charged in the original sales",
+  "relevant": [
+   "FC-1023"
+  ]
+ },
+ {
+  "id": "Q17",
+  "kind": "paraphrase",
+  "query": "Restaurant card volume tripled overnight and most transactions were keyed in by hand",
+  "relevant": [
+   "FC-1024"
+  ]
+ },
+ {
+  "id": "Q18",
+  "kind": "paraphrase",
+  "query": "Quiet student account receiving money from strangers and passing nearly all of it on within a day",
+  "relevant": [
+   "FC-1025"
+  ]
+ },
+ {
+  "id": "Q19",
+  "kind": "paraphrase",
+  "query": "So-called salary payment received, then most of it sent to crypto exchanges in smaller amounts",
+  "relevant": [
+   "FC-1026"
+  ]
+ },
+ {
+  "id": "Q20",
+  "kind": "paraphrase",
+  "query": "Several new accounts using one phone number and one device, each receiving and forwarding similar sums",
+  "relevant": [
+   "FC-1027"
+  ]
+ },
+ {
+  "id": "Q21",
+  "kind": "paraphrase",
+  "query": "Money from people who reported romance scams collected in one account and sent abroad",
+  "relevant": [
+   "FC-1028"
+  ]
+ },
+ {
+  "id": "Q22",
+  "kind": "paraphrase",
+  "query": "Outgoing wire to a bank in an embargoed country routed through an intermediary bank",
+  "relevant": [
+   "FC-1029"
+  ]
+ },
+ {
+  "id": "Q23",
+  "kind": "paraphrase",
+  "query": "Payment to a company whose owner appears on a sanctions list",
+  "relevant": [
+   "FC-1031"
+  ]
+ },
+ {
+  "id": "Q24",
+  "kind": "paraphrase",
+  "query": "Trade finance payment for goods shipped to a port in a sanctioned region",
+  "relevant": [
+   "FC-1032"
+  ]
+ },
+ {
+  "id": "Q25",
+  "kind": "paraphrase",
+  "query": "Applicant's Social Security number was issued recently but they claim to be forty, with a very new credit file",
+  "relevant": [
+   "FC-1033"
+  ]
+ },
+ {
+  "id": "Q26",
+  "kind": "paraphrase",
+  "query": "Customer slowly built good credit, then maxed out every credit line in a week and stopped paying",
+  "relevant": [
+   "FC-1034"
+  ]
+ },
+ {
+  "id": "Q27",
+  "kind": "paraphrase",
+  "query": "Many applications sharing one address and phone number but with different names and SSNs",
+  "relevant": [
+   "FC-1035"
+  ]
+ },
+ {
+  "id": "Q28",
+  "kind": "paraphrase",
+  "query": "Customer says online purchases were unauthorized, yet the device, IP and delivery address are their own",
+  "relevant": [
+   "FC-1036"
+  ]
+ },
+ {
+  "id": "Q29",
+  "kind": "paraphrase",
+  "query": "Caller pretending to be the bank's fraud team persuades an elderly customer to wire money to a new payee",
+  "relevant": [
+   "FC-1038"
+  ]
+ },
+ {
+  "id": "Q30",
+  "kind": "paraphrase",
+  "query": "Deposit paid to a fake landlord from an online rental listing who then disappeared",
+  "relevant": [
+   "FC-1039"
+  ]
+ },
+ {
+  "id": "Q31",
+  "kind": "paraphrase",
+  "query": "Weekly transfers growing in size to an investment site promising guaranteed returns",
+  "relevant": [
+   "FC-1040"
+  ]
+ },
+ {
+  "id": "Q32",
+  "kind": "paraphrase",
+  "query": "Elderly customer making large cash withdrawals with a new companion who does the talking",
+  "relevant": [
+   "FC-1041"
+  ]
+ },
+ {
+  "id": "Q33",
+  "kind": "paraphrase",
+  "query": "Supplier's bank details changed after an email request and the next invoice paid to the new account",
+  "relevant": [
+   "FC-1043"
+  ]
+ },
+ {
+  "id": "Q34",
+  "kind": "paraphrase",
+  "query": "Urgent email that looks like it came from the CEO asking finance for a confidential overseas wire",
+  "relevant": [
+   "FC-1044"
+  ]
+ },
+ {
+  "id": "Q35",
+  "kind": "paraphrase",
+  "query": "Returned parcels contained cheaper, different goods across more than twenty refunds",
+  "relevant": [
+   "FC-1046"
+  ]
+ },
+ {
+  "id": "Q36",
+  "kind": "paraphrase",
+  "query": "Checks moved back and forth between the customer's own accounts at two banks before either cleared",
+  "relevant": [
+   "FC-1048"
+  ]
+ },
+ {
+  "id": "Q37",
+  "kind": "paraphrase",
+  "query": "Mobile deposit of a check that was already deposited at another bank",
+  "relevant": [
+   "FC-1049"
+  ]
+ },
+ {
+  "id": "Q38",
+  "kind": "exact_id",
+  "query": "FC-1043",
+  "relevant": [
+   "FC-1043"
+  ]
+ },
+ {
+  "id": "Q39",
+  "kind": "exact_id",
+  "query": "FC-1009",
+  "relevant": [
+   "FC-1009"
+  ]
+ },
+ {
+  "id": "Q40",
+  "kind": "exact_id",
+  "query": "show me case FC-1057",
+  "relevant": [
+   "FC-1057"
+  ]
+ },
+ {
+  "id": "Q41",
+  "kind": "exact_id",
+  "query": "FC-1020 details",
+  "relevant": [
+   "FC-1020"
+  ]
+ },
+ {
+  "id": "Q42",
+  "kind": "exact_id",
+  "query": "what happened in FC-1034",
+  "relevant": [
+   "FC-1034"
+  ]
+ },
+ {
+  "id": "Q43",
+  "kind": "lookalike",
+  "query": "Customer forgot their password, reset it, then paid their usual monthly bills to payees they already had",
+  "relevant": [
+   "FC-1054"
+  ]
+ },
+ {
+  "id": "Q44",
+  "kind": "lookalike",
+  "query": "Large wire abroad to buy a house overseas, with paperwork provided before the transfer",
+  "relevant": [
+   "FC-1052"
+  ]
+ },
+ {
+  "id": "Q45",
+  "kind": "lookalike",
+  "query": "Small business depositing just under 10,000 dollars in cash every week, matching its sales records for years",
+  "relevant": [
+   "FC-1053"
+  ]
+ },
+ {
+  "id": "Q46",
+  "kind": "lookalike",
+  "query": "Card spending abroad during a business trip that matches the travel notice on file",
+  "relevant": [
+   "FC-1056",
+   "FC-1021"
+  ]
+ },
+ {
+  "id": "Q47",
+  "kind": "lookalike",
+  "query": "Sanctions name match where date of birth, address and nationality are all different",
+  "relevant": [
+   "FC-1057"
+  ]
+ },
+ {
+  "id": "Q48",
+  "kind": "lookalike",
+  "query": "Merchant sales jumped during the holiday season, the same pattern as last year",
+  "relevant": [
+   "FC-1058"
+  ]
+ },
+ {
+  "id": "Q49",
+  "kind": "lookalike",
+  "query": "Money sent to a new payee who turned out to be a family member, confirmed on a callback",
+  "relevant": [
+   "FC-1059"
+  ]
+ },
+ {
+  "id": "Q50",
+  "kind": "lookalike",
+  "query": "Login from a new phone after a device upgrade, and step-up verification was passed",
+  "relevant": [
+   "FC-1060"
+  ]
+ },
+ {
+  "id": "Q51",
+  "kind": "lookalike",
+  "query": "Routine grocery purchase at the customer's usual store from their own phone at home",
+  "relevant": [
+   "FC-1055"
+  ]
+ },
+ {
+  "id": "Q52",
+  "kind": "hard_paraphrase",
+  "query": "Crooks validated a stolen card with tiny buys, then emptied it",
+  "relevant": [
+   "FC-1001",
+   "FC-1013",
+   "FC-1014",
+   "FC-1015"
+  ]
+ },
+ {
+  "id": "Q53",
+  "kind": "hard_paraphrase",
+  "query": "Hacker hijacked the customer's online login and drained the funds",
+  "relevant": [
+   "FC-1002",
+   "FC-1006",
+   "FC-1009",
+   "FC-1010",
+   "FC-1011",
+   "FC-1012",
+   "FC-1050",
+   "FC-1051"
+  ]
+ },
+ {
+  "id": "Q54",
+  "kind": "hard_paraphrase",
+  "query": "Splitting cash into chunks to dodge government reporting",
+  "relevant": [
+   "FC-1003",
+   "FC-1016",
+   "FC-1017",
+   "FC-1018"
+  ]
+ },
+ {
+  "id": "Q55",
+  "kind": "hard_paraphrase",
+  "query": "Account used as a pass-through to launder stolen money",
+  "relevant": [
+   "FC-1007",
+   "FC-1025",
+   "FC-1026",
+   "FC-1027",
+   "FC-1028"
+  ]
+ },
+ {
+  "id": "Q56",
+  "kind": "hard_paraphrase",
+  "query": "Fake person built from a mix of real and invented identity details",
+  "relevant": [
+   "FC-1033",
+   "FC-1034",
+   "FC-1035"
+  ]
+ },
+ {
+  "id": "Q57",
+  "kind": "hard_paraphrase",
+  "query": "Fraudster impersonated the boss over email to get money moved",
+  "relevant": [
+   "FC-1043",
+   "FC-1044",
+   "FC-1045"
+  ]
+ },
+ {
+  "id": "Q58",
+  "kind": "hard_paraphrase",
+  "query": "Grandparent being taken advantage of financially by someone close to them",
+  "relevant": [
+   "FC-1041",
+   "FC-1042"
+  ]
+ },
+ {
+  "id": "Q59",
+  "kind": "hard_paraphrase",
+  "query": "Customer was tricked into sending money to a scammer themselves",
+  "relevant": [
+   "FC-1038",
+   "FC-1039",
+   "FC-1040"
+  ]
+ },
+ {
+  "id": "Q60",
+  "kind": "hard_paraphrase",
+  "query": "Shopper lies about returns and missing parcels to get money back",
+  "relevant": [
+   "FC-1046",
+   "FC-1047"
+  ]
+ },
+ {
+  "id": "Q61",
+  "kind": "hard_paraphrase",
+  "query": "Store owner running bogus sales through the payment terminal",
+  "relevant": [
+   "FC-1005",
+   "FC-1022",
+   "FC-1023",
+   "FC-1024"
+  ]
+ },
+ {
+  "id": "Q62",
+  "kind": "hard_paraphrase",
+  "query": "Payment to someone on a government blacklist",
+  "relevant": [
+   "FC-1008",
+   "FC-1029",
+   "FC-1030",
+   "FC-1031",
+   "FC-1032"
+  ]
+ },
+ {
+  "id": "Q63",
+  "kind": "hard_paraphrase",
+  "query": "Cheque floating between banks to inflate the balance",
+  "relevant": [
+   "FC-1048"
+  ]
+ }
+]

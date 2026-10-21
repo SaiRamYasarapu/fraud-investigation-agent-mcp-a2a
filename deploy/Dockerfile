@@ -10,7 +10,7 @@ COPY . .
 # For live Bedrock calls, pass AWS credentials + region as environment
 # variables (or an attached IAM role when running on AgentCore Runtime/ECS):
 #   USE_LIVE_BEDROCK=true
-#   AWS_REGION=us-east-1
-#   BEDROCK_MODEL_ID=anthropic.claude-3-5-sonnet-20241022-v2:0
+#   AWS_REGION=us-west-2
+#   BEDROCK_MODEL_ID=us.anthropic.claude-haiku-4-5-20251001-v1:0
 
 CMD ["python3", "main.py"]

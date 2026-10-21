@@ -1,5 +1,22 @@
 [
   {"name": "Viktor Rennko", "list": "OFAC-SDN", "reason": "asset freeze order"},
   {"name": "Global Trade Holdings Ltd", "list": "OFAC-SDN", "reason": "sanctioned entity"},
-  {"name": "Amara Solis", "list": "EU-Consolidated", "reason": "asset freeze order"}
+  {"name": "Amara Solis", "list": "EU-Consolidated", "reason": "asset freeze order"},
+  {"name": "Dmitri Valkov", "list": "OFAC-SDN", "reason": "asset freeze order"},
+  {"name": "Northgate Shipping FZE", "list": "OFAC-SDN", "reason": "sanctioned entity"},
+  {"name": "Hassan Al-Mansour", "list": "UN-Consolidated", "reason": "travel ban and asset freeze"},
+  {"name": "Elena Marchetti", "list": "EU-Consolidated", "reason": "asset freeze order"},
+  {"name": "Crescent Commodities Ltd", "list": "UK-HMT", "reason": "sanctioned entity"},
+  {"name": "Pavel Grushin", "list": "OFAC-SDN", "reason": "asset freeze order"},
+  {"name": "Blue Meridian Trading Co", "list": "OFAC-SDN", "reason": "sanctioned entity"},
+  {"name": "Farid Rahimi", "list": "UN-Consolidated", "reason": "asset freeze order"},
+  {"name": "Oksana Belova", "list": "EU-Consolidated", "reason": "asset freeze order"},
+  {"name": "Redline Logistics SA", "list": "EU-Consolidated", "reason": "sanctioned entity"},
+  {"name": "Igor Stepanenko", "list": "UK-HMT", "reason": "asset freeze order"},
+  {"name": "Golden Horizon Exchange", "list": "OFAC-SDN", "reason": "sanctioned money service business"},
+  {"name": "Karim Haddad", "list": "UN-Consolidated", "reason": "travel ban"},
+  {"name": "Sergei Volkonsky", "list": "OFAC-SDN", "reason": "asset freeze order"},
+  {"name": "Eastline Petroleum Corp", "list": "UK-HMT", "reason": "sanctioned entity"},
+  {"name": "Mariam Tahiri", "list": "EU-Consolidated", "reason": "asset freeze order"},
+  {"name": "Atlas Maritime Holdings", "list": "OFAC-SDN", "reason": "sanctioned vessel owner"}
 ]

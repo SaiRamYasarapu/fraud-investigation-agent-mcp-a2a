@@ -1,10 +1,11 @@
 """
 Detection Agent.
 
-Detection Agent uses a RAG system to retrieve similar fraud cases from the vector store, and it
-also calls the Investigation Agent via A2A client to get the account info, the KYC status, and
-the sanctions screen status as well. After gathering all this information, it uses a live LLM,
-or a predetermined class, RuleBasedFraudReasoner, to return a verdict and rationale.
+Detection Agent uses a RAG system to retrieve similar fraud cases and the relevant bank policy
+sections from the vector store, and it also calls the Investigation Agent via A2A client to get
+the account info, the KYC status, and the sanctions screen status as well. After gathering all
+this information, it uses a live LLM, or a predetermined class, RuleBasedFraudReasoner, to
+return a verdict and rationale.
 """
 from src.agents.a2a_protocol import (
     A2AClient,
@@ -13,13 +14,17 @@ from src.agents.a2a_protocol import (
     A2ATaskResult,
     AgentCard,
 )
-from src.llm.bedrock_client import BedrockLLM
-from src.vector_store.retriever import FraudCaseRetriever
+from src.llm.bedrock_client import POLICY_HEADER, BedrockLLM
+from src.vector_store.rerank import RerankedCaseRetriever, RerankedPolicyRetriever
 
 SYSTEM_PROMPT = (
-    "You are a fraud detection analyst. Given a transaction description and "
-    "similar historical fraud cases, identify the likely typology and note "
-    "what account-level evidence would confirm or rule it out."
+    "You are a fraud detection analyst. Given a transaction description, "
+    "similar historical fraud cases, account evidence and relevant bank policy, "
+    "identify the likely typology and decide what should happen to the transaction. "
+    "Reply with only a JSON object with two keys: \"verdict\", one of "
+    "ESCALATE_COMPLIANCE_HOLD, ESCALATE_HUMAN_REVIEW, FLAG_FOR_REVIEW or CLEAR, "
+    "and \"rationale\", one or two sentences citing the evidence and any policy "
+    "section that applies."
 )
 
 
@@ -27,7 +32,8 @@ class DetectionAgent:
     AGENT_ID = "detection-agent"
 
     def __init__(self):
-        self.retriever = FraudCaseRetriever()
+        self.retriever = RerankedCaseRetriever()
+        self.policy_retriever = RerankedPolicyRetriever()
         self.llm = BedrockLLM()
         self.a2a = A2AClient(from_agent_id=self.AGENT_ID)
         # Registers this agent so InvestigationAgent can reach it via A2A.
@@ -44,6 +50,7 @@ class DetectionAgent:
         """analyze() is the function that runs the entire Detection Agent pipeline from
         start to finish. This is the single method orchestrator.py calls to do all of the Detection Agent's work."""
         retrieved = self.retriever.retrieve(transaction_description, top_k=3)
+        policies = self.policy_retriever.retrieve(transaction_description, top_k=2)
         top_match = retrieved[0] if retrieved else None
 
         # Ask the Investigation Agent for account evidence over A2A.
@@ -53,25 +60,28 @@ class DetectionAgent:
             payload={"account_id": account_id, "suspected_typology": top_match.typology if top_match else None},
         )
 
-        prompt = self._build_prompt(transaction_description, retrieved, evidence_result.output)
+        prompt = self._build_prompt(transaction_description, retrieved, evidence_result.output, policies)
         raw_verdict = self.llm.invoke(SYSTEM_PROMPT, prompt)
 
         return {
             "retrieved_cases": [r.__dict__ for r in retrieved],
+            "retrieved_policies": [p.__dict__ for p in policies],
             "account_evidence": evidence_result.output,
             "llm_prompt": prompt,
             "verdict_raw": raw_verdict,
         }
 
-    def _build_prompt(self, txn_desc, retrieved, evidence: dict) -> str:
+    def _build_prompt(self, txn_desc, retrieved, evidence: dict, policies=()) -> str:
         cases_block = "\n".join(
             f"- [{r.typology}] {r.pattern} (resolution: {r.resolution})"
             for r in retrieved
         )
+        policy_block = "\n".join(f"- [{p.source} > {p.section}] {p.text}" for p in policies)
         return (
             f"Transaction under review:\n{txn_desc}\n\n"
             f"Similar historical fraud cases (retrieved via RAG):\n{cases_block}\n\n"
             f"Account evidence gathered by Investigation Agent:\n{evidence}\n\n"
+            f"{POLICY_HEADER}\n{policy_block}\n\n"
             f"Provide a verdict."
         )
 

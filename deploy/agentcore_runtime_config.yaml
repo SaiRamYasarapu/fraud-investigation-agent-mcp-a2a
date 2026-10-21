@@ -15,7 +15,7 @@ runtime:
                                  # this agent uses LangGraph for orchestration
   model:
     provider: bedrock
-    model_id: anthropic.claude-3-5-sonnet-20241022-v2:0
+    model_id: us.anthropic.claude-sonnet-5-5   # demo and final testing; development uses us.anthropic.claude-haiku-4-5-20251001-v1:0
 
 memory:
   # AgentCore Memory persists InvestigationState across turns of a

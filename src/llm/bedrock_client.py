@@ -19,8 +19,11 @@ from typing import ClassVar
 
 USE_LIVE_BEDROCK = os.environ.get("USE_LIVE_BEDROCK", "false").lower() == "true"
 BEDROCK_MODEL_ID = os.environ.get(
-    "BEDROCK_MODEL_ID", "anthropic.claude-3-5-sonnet-20241022-v2:0"
+    "BEDROCK_MODEL_ID", "us.anthropic.claude-haiku-4-5-20251001-v1:0"
 )
+
+# Heading of the policy section in the Detection Agent prompt.
+POLICY_HEADER = "Relevant bank policy (retrieved via RAG):"
 
 
 class BedrockLLM:
@@ -65,7 +68,9 @@ class RuleBasedFraudReasoner:
     }
 
     def reason(self, system_prompt: str, user_prompt: str) -> str:
-        text = user_prompt.lower()
+        # Policy text is reference material, not evidence about this transaction,
+        # so the keyword rules below only read the part of the prompt before it.
+        text = user_prompt.split(POLICY_HEADER)[0].lower()
         matched_typologies = [
             t for t in self.HIGH_RISK_TYPOLOGIES
             if t in text or t.replace("_", " ") in text
