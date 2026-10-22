@@ -24,6 +24,7 @@ match; set RERANK_MODE=bedrock to score the live Bedrock reranker.
 Usage:
     python -m src.vector_store.evaluate
     python -m src.vector_store.evaluate --misses   # also list queries each setup got wrong
+    python -m src.vector_store.evaluate --stats    # also add 95% ranges and paired tests
 """
 from __future__ import annotations
 
@@ -34,6 +35,7 @@ import math
 from src.vector_store.hybrid import HybridCaseRetriever
 from src.vector_store.rerank import RerankedCaseRetriever, rerank_mode
 from src.vector_store.retriever import DATA_DIR, get_case_retriever
+from src.vector_store.significance import bootstrap_ci, paired_test
 
 EVAL_PATH = DATA_DIR / "eval_queries.json"
 K = 5
@@ -97,7 +99,8 @@ def build_setups() -> dict:
 
 def evaluate(setups: dict, queries: list[dict], k: int = K) -> dict:
     """Average Recall@k, MRR and nDCG@k per setup, overall and per query kind,
-    plus the IDs of the queries each setup missed (no relevant case in the top k)."""
+    plus the IDs of the queries each setup missed (no relevant case in the top k).
+    The per-query scores are kept too, in query order, for the significance checks."""
     report = {}
     for name, setup in setups.items():
         rows = []
@@ -118,11 +121,12 @@ def evaluate(setups: dict, queries: list[dict], k: int = K) -> dict:
             for group, rs in groups.items()
         }
         report[name]["misses"] = [r["id"] for r in rows if r["recall"] == 0]
+        report[name]["per_query"] = rows
     return report
 
 
 def print_report(report: dict) -> None:
-    groups = [g for g in next(iter(report.values())) if g != "misses"]
+    groups = [g for g in next(iter(report.values())) if g not in ("misses", "per_query")]
     for group in groups:
         n = next(iter(report.values()))[group]["n"]
         print(f"\n{group} ({n} queries)")
@@ -132,12 +136,35 @@ def print_report(report: dict) -> None:
             print(f"  {name:<15}{r['recall']:>10.3f}{r['mrr']:>8.3f}{r['ndcg']:>9.3f}")
 
 
+COMPARISONS = [("bm25", "vector"), ("hybrid", "vector"), ("hybrid", "bm25"), ("hybrid+rerank", "hybrid")]
+
+
+def print_significance(report: dict, metric: str = "ndcg") -> None:
+    """95% range for each setup's average, then paired tests between setups."""
+    scores = {name: [r[metric] for r in res["per_query"]] for name, res in report.items()}
+    print(f"\n{metric} with 95% bootstrap ranges")
+    for name, values in scores.items():
+        ci = bootstrap_ci(values)
+        print(f"  {name:<15}{ci.mean:>7.3f}  [{ci.low:.3f}, {ci.high:.3f}]")
+    print(f"\npaired tests on {metric} (difference = first minus second)")
+    for a, b in COMPARISONS:
+        if a in scores and b in scores:
+            t = paired_test(scores[a], scores[b])
+            if t.low == t.high == 0:
+                verdict = "identical"
+            else:
+                verdict = "real difference" if t.significant else "could be luck"
+            print(f"  {a} vs {b}: {t.mean_diff:+.3f} [{t.low:+.3f}, {t.high:+.3f}]  "
+                  f"p = {t.p_value:.3f}  ({verdict})")
+
+
 if __name__ == "__main__":
     from dotenv import load_dotenv
 
     load_dotenv()
     parser = argparse.ArgumentParser(description="Score retrieval setups on labelled queries.")
     parser.add_argument("--misses", action="store_true", help="list queries with no relevant case in the top 5")
+    parser.add_argument("--stats", action="store_true", help="add 95%% ranges and paired tests on nDCG@5")
     args = parser.parse_args()
 
     with open(EVAL_PATH) as f:
@@ -145,6 +172,8 @@ if __name__ == "__main__":
     print(f"{len(queries)} queries, rerank mode: {rerank_mode()}")
     report = evaluate(build_setups(), queries)
     print_report(report)
+    if args.stats:
+        print_significance(report)
     if args.misses:
         print()
         for name, res in report.items():
